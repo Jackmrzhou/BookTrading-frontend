@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Home from '@/view/HomeMain'
 import sso from '@/view/sso'
 import Profile from '@/view/Profile'
+import Register from '@/view/Register'
+import BookDetail from '@/view/BookDetail'
 
 Vue.use(Router)
 
@@ -20,6 +22,14 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       component: Profile
+    }, {
+      path: '/register',
+      name: 'register',
+      component: Register
+    }, {
+      path: '/book',
+      name: 'BookDetail',
+      component: BookDetail
     }
   ]
 })

@@ -1,23 +1,24 @@
 <template>
     <div id="HomeMainContainer">
-        <el-row>
-          <el-col :span="18">
+        <el-row :gutter="10">
+          <el-col :xs="24" :lg="18" :xl="18">
             <div id="MainContents">
                 <div v-for="(row, i) in BookItems" :key="'bookRow' + i">
                     <el-row id="bookRow">
                         <div v-for="item in row" :key="item.id" id="ItemBlock">
-                            <el-col :span="4" :offset="1">
+                            <el-col :xs="11" :lg="4" :xl="4">
                                 <BookItemMain :img="item.img" :title="item.title" :price="item.price" :author="item.author"></BookItemMain>
                             </el-col>
+                            <el-col :xs="1" :lg="2" :xl="1">&nbsp;</el-col>
                         </div>
                     </el-row>
                 </div>
             </div>
           </el-col>
-          <el-col :span="4">
+          <el-col :xl="4" :lg="4" :xs="0">
             <Sidebar></Sidebar>
           </el-col>
-          <el-col :span="2"></el-col>
+          <el-col :xl="2" :lg="4" :xs="0"></el-col>
         </el-row>
     </div>
 </template>

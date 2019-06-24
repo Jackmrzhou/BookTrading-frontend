@@ -1,12 +1,14 @@
 <template>
     <div id="sso">
       <el-row>
-        <el-col :span="6" :offset="9">
+        <el-col :xs="3" :lg="9" :xl="9">&nbsp;</el-col>
+        <el-col :xs="18" :lg="6" :xl="6">
           <el-image :src="imageSrc" class="login-logo" :fit="'scale-down'"></el-image>
         </el-col>
       </el-row>
       <el-row>
-        <el-col :span="6" :offset="9">
+        <el-col :xs="1" :lg="9" :xl="9">&nbsp;</el-col>
+        <el-col :xs="22" :lg="6" :xl="6">
           <el-card class="login-box">
             <el-form ref="loginForm" :model="formModel" :rules="rules">
               <h3 class="login-title">请先登录</h3>
@@ -24,9 +26,12 @@
         </el-col>
       </el-row>
       <el-row style="padding-top:10px;">
-        <el-col :span="6" :offset="9">
+        <el-col :xs="1" :lg="9" :xl="9">&nbsp;</el-col>
+        <el-col :xs="22" :lg="6" :xl="6">
           <el-card style="text-align: center;">
-            <span>还没有账号？</span><el-link style="font-size:16px; padding-bottom:4px;" type="primary" href="/register">去注册</el-link>
+            <span>还没有账号？</span><el-link style="font-size:16px; padding-bottom:4px;" type="primary">
+              <router-link :to="{name: 'register'}">去注册</router-link>
+            </el-link>
           </el-card>
         </el-col>
       </el-row>
