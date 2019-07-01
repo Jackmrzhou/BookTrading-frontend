@@ -1,11 +1,11 @@
 <template>
-    <div id="Profile">
+    <div id="Records">
         <el-container>
             <el-header>
                 <Header></Header>
             </el-header>
             <el-main>
-                <ProfileMain></ProfileMain>
+                <RecordMain></RecordMain>
             </el-main>
             <el-footer>
                 <Footer></Footer>
@@ -17,13 +17,13 @@
 <script>
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import ProfileMain from '../components/ProfileMain'
+import RecordMain from '../components/RecordMain'
 export default {
-  name: 'Profile',
+  name: 'Records',
   components: {
     'Header': Header,
     'Footer': Footer,
-    'ProfileMain': ProfileMain
+    'RecordMain': RecordMain
   }
 }
 </script>

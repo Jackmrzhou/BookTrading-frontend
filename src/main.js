@@ -7,11 +7,14 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'element-ui/lib/theme-chalk/display.css'
 import axios from 'axios'
+import VueResource from 'vue-resource'
+import VueCookies from 'vue-cookies'
 
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
-
+Vue.use(VueResource)
+Vue.use(VueCookies)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

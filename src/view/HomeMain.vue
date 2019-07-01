@@ -5,7 +5,7 @@
                 <Header></Header>
             </el-header>
             <el-main>
-                <HomeMainContainer></HomeMainContainer>
+                <HomeMainContainer :type="1"></HomeMainContainer>
             </el-main>
             <el-footer>
                 <Footer></Footer>

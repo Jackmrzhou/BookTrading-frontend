@@ -16,13 +16,13 @@
                         <RegisterForm @sendStatus="getChildStatus"></RegisterForm>
                       </div>
                       <div v-else-if="currentStep == 1">
-                        <SetPwdForm @sendStatus="getChildStatus"></SetPwdForm>
+                        <CreateUser @sendStatus="getChildStatus"></CreateUser>
                       </div>
                       <div v-else>
                         <div class="successMsg">
                           <span>
                             恭喜！你已经完成了全部的创建步骤！
-                            <el-link style="font-size:18px; padding-bottom:4px;" type="primary"><router-link :to="{name : 'sso'}"> 去登陆</router-link></el-link>
+                            <el-link style="font-size:18px; padding-bottom:4px;" type="primary"><router-link :to="{name : 'home'}"> 去首页</router-link></el-link>
                           </span>
                         </div>
                       </div>
@@ -41,7 +41,7 @@ import RegisterProgress from '../components/RegisterProgress'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import RegisterForm from '../components/RegisterForm'
-import SetPwdForm from '../components/SetPwdForm'
+import CreateUser from '../components/CreateUser'
 export default {
   name: 'Register',
   components: {
@@ -49,7 +49,7 @@ export default {
     'Header': Header,
     'Footer': Footer,
     'RegisterForm': RegisterForm,
-    'SetPwdForm': SetPwdForm
+    'CreateUser': CreateUser
   },
   data () {
     return {

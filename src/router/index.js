@@ -5,6 +5,13 @@ import sso from '@/view/sso'
 import Profile from '@/view/Profile'
 import Register from '@/view/Register'
 import BookDetail from '@/view/BookDetail'
+import SellBook from '@/view/SellBook'
+import RequestBook from '@/view/RequestBook'
+import Records from '@/view/Records'
+import Message from '@/view/Message'
+import Order from '@/view/Order'
+import RequestHome from '@/view/RequestHome'
+import Logout from '@/view/Logout'
 
 Vue.use(Router)
 
@@ -19,7 +26,7 @@ export default new Router({
       name: 'sso',
       component: sso
     }, {
-      path: '/profile',
+      path: '/center/profile',
       name: 'profile',
       component: Profile
     }, {
@@ -30,6 +37,34 @@ export default new Router({
       path: '/book',
       name: 'BookDetail',
       component: BookDetail
+    }, {
+      path: '/center/sell',
+      name: 'sellBook',
+      component: SellBook
+    }, {
+      path: '/center/request',
+      name: 'requestBook',
+      component: RequestBook
+    }, {
+      path: '/center/records',
+      name: 'records',
+      component: Records
+    }, {
+      path: '/message',
+      name: 'message',
+      component: Message
+    }, {
+      path: '/order',
+      name: 'order',
+      component: Order
+    }, {
+      path: '/request',
+      name: 'RequestHome',
+      component: RequestHome
+    }, {
+      path: '/logout',
+      name: 'Logout',
+      component: Logout
     }
   ]
 })

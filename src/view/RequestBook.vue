@@ -1,11 +1,11 @@
 <template>
-    <div id="Profile">
+    <div id="RequestBook">
         <el-container>
             <el-header>
                 <Header></Header>
             </el-header>
             <el-main>
-                <ProfileMain></ProfileMain>
+                <RequestBookMain></RequestBookMain>
             </el-main>
             <el-footer>
                 <Footer></Footer>
@@ -17,13 +17,13 @@
 <script>
 import Header from '../components/Header'
 import Footer from '../components/Footer'
-import ProfileMain from '../components/ProfileMain'
+import RequestBookMain from '../components/RequestBookMain'
 export default {
-  name: 'Profile',
+  name: 'RequestBook',
   components: {
     'Header': Header,
     'Footer': Footer,
-    'ProfileMain': ProfileMain
+    'RequestBookMain': RequestBookMain
   }
 }
 </script>

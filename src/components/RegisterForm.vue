@@ -1,30 +1,18 @@
 <template>
     <div id="RegisterForm" style="padding-top: 50px;">
-        <el-form :model="registerForm" :label-position="labelPosition"  label-width="80px">
-          <el-form-item label="电子邮箱" prop="Email">
-              <el-input v-model="registerForm.Email"></el-input>
+        <el-form :ref="formRef" :model="registerForm" :label-position="labelPosition"  label-width="80px" :rules="rules">
+          <el-form-item label="电子邮箱" prop="email">
+              <el-input v-model="registerForm.email"></el-input>
           </el-form-item>
-          <el-form-item label="用户名">
-              <el-input v-model="registerForm.Username"></el-input>
+          <el-form-item label="密码" prop="password">
+              <el-input v-model="registerForm.password" type="password"></el-input>
           </el-form-item>
-          <el-form-item label="头像上传">
-              <el-upload
-                class="avatar-uploader"
-                :action="imgPostApi"
-                :name="postKey"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload">
-                <img v-if="imageUrl" :src="imageUrl" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
+          <el-form-item label="再次输入" prop="passwordDup">
+              <el-input v-model="registerForm.passwordDup" type="password"></el-input>
           </el-form-item>
-          <el-form-item label="简介">
-              <el-input type="textarea" v-model="registerForm.intro" placeholder="写点什么介绍一下自己吧"></el-input>
-          </el-form-item>
-          <el-form-item label="验证码">
-              <el-input v-model="registerForm.Code">
-                  <el-button type="primary" slot="append"><i class="el-icon-s-promotion"></i>发送验证码</el-button>
+          <el-form-item label="验证码" prop="verify_code">
+              <el-input v-model="registerForm.verify_code">
+                  <el-button type="primary" slot="append" @click="sendCode"><i class="el-icon-s-promotion"></i>发送验证码</el-button>
               </el-input>
           </el-form-item>
           <el-form-item >
@@ -39,56 +27,101 @@ export default {
   name: 'RegisterForm',
   data () {
     return {
+      formRef: 'regForm',
       labelPosition: 'left',
       registerForm: {
-        Email: '',
-        Username: '',
-        Code: ''
+        email: '',
+        verify_code: '',
+        password: '',
+        passwordDup: ''
       },
-      imgPostApi: 'http://localhost:7890/img/',
-      postKey: 'image',
-      imageUrl: ''
+      rules: {
+        email: [{
+          required: true,
+          message: '账号不能为空',
+          trigger: 'blur'
+        }],
+        password: [{
+          required: true,
+          message: '密码不能为空',
+          trigger: 'blur'
+        }],
+        verify_code: [{
+          required: true,
+          message: '验证码不能为空',
+          trigger: 'blur'
+        }],
+        passwordDup: [{
+          required: true,
+          min: 6,
+          message: '长度不能小于6',
+          trigger: 'blur'
+        }, {
+          validator: this.validatePassword
+        }]
+      },
+      registerUrl: '/api/passport/register',
+      verifyCodeUrl: '/api/passport/verifyCode'
     }
   },
   methods: {
+    validatePassword (rule, value, callback) {
+      let err
+      if (value !== this.registerForm.password) {
+        err = '两次密码输入不一致'
+      }
+      callback(err)
+    },
     next () {
-      this.$emit('sendStatus', true)
+      this.$refs.regForm.validate((valid) => {
+        if (valid) {
+          this.$http.post(this.registerUrl, this.registerForm).then((response) => {
+            if (response.body.code !== 0) {
+              this.$notify({
+                title: '创建结果',
+                message: response.body.msg,
+                type: 'error'
+              })
+            } else {
+              this.$notify({
+                title: '创建结果',
+                message: '创建成功',
+                type: 'success'
+              })
+              this.$cookies.set('sessionID', response.body.data.session_id, '2D')
+              this.$emit('sendStatus', true)
+            }
+          }).catch((response) => {
+            this.$notify({
+              title: '创建结果',
+              message: response.body.msg,
+              type: 'error'
+            })
+          })
+        }
+      })
     },
-    beforeAvatarUpload () {
-
-    },
-    handleAvatarSuccess () {
-
+    sendCode () {
+      this.$http.post(this.verifyCodeUrl, {email: this.registerForm.email}).then((response) => {
+        if (response.body.code === 0) {
+          this.$notify({
+            title: '发送结果',
+            message: '发送验证码成功',
+            type: 'success'
+          })
+        } else {
+          this.$notify({
+            title: '发送结果',
+            message: '发送验证码失败, 请稍后再试',
+            type: 'error'
+          })
+        }
+      })
     }
   }
 }
 </script>
 
 <style scoped>
-.avatar-uploader {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    width: 178px;
-}
-.avatar-uploader:hover {
-    border-color: #409EFF;
-}
-.avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    margin-left: auto;
-    margin-right: auto;
-    height: 178px;
-    width: 178px;
-    line-height: 178px;
-    text-align: center;
-}
-.avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-}
+
 </style>
